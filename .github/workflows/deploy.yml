@@ -38,12 +38,12 @@ jobs:
       - name: Install dependencies
         run: npm ci # Use 'ci' for cleaner installs in CI/CD
       - name: Build with Next.js
-        run: npm run build # This runs the 'build' script defined in package.json which includes 'next build'
+        run: npm run build && touch ./out/.nojekyll # This runs the 'build' script defined in package.json which includes 'next build' 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository by default - Next.js export puts files in 'out' folder
-          path: './.next'
+          path: './out' # Adjust this if your output directory is different
 
   # Deployment job
   deploy:
