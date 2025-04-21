@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository by default - Next.js export puts files in 'out' folder
-          path: './out'
+          path: './.next'
 
   # Deployment job
   deploy:
