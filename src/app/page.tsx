@@ -1,70 +1,44 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+    // Main container - Full height, flex column, dark background
+    <div className="flex flex-col min-h-screen bg-gray-900 text-gray-100">
 
-        {/* Main heading */}
-        <h1 className="text-4xl font-bold"> {/* Added basic styling */}
-          My Portfolio
+      {/* Header Section (Placeholder) */}
+      <header className="w-full p-4 border-b border-gray-700">
+        <nav className="container mx-auto flex justify-between items-center">
+          <div className="text-xl font-bold">Luke Edwards</div> {/* Your Name/Logo */}
+          <div>
+            {/* Navigation Links (will add later) */}
+            <span className="mx-2">About</span>
+            <span className="mx-2">Projects</span>
+            <span className="mx-2">Contact</span>
+          </div>
+        </nav>
+      </header>
+
+      {/* Main Content Area - Takes up remaining space */}
+      <main className="flex-grow container mx-auto flex flex-col items-center justify-center p-8 text-center">
+
+        <h1 className="text-5xl font-bold mb-4"> {/* Larger heading, margin bottom */}
+          My Awesome Portfolio
         </h1>
 
-        {/* Placeholder for future content */}
-        <p className="text-lg"> {/* Added basic styling */}
-          Showcasing tech, art, and photography. More coming soon...
+        <p className="text-xl text-gray-400 mb-8"> {/* Larger text, lighter color, margin bottom */}
+          Showcasing tech, art, and photography.
         </p>
 
-        {/* More content like project links or images here later */}
+        {/* Placeholder for project grid or other content */}
+        <div className="border border-dashed border-gray-600 p-10 rounded">
+          <p>Content Area</p>
+        </div>
 
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer Section */}
+      <footer className="w-full p-4 text-center text-sm text-gray-500 border-t border-gray-700">
+        <p>© 2025 Luke Edwards</p> {/* Make sure name/year are correct */}
       </footer>
+
     </div>
   );
 }
