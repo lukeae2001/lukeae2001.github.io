@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen bg-gray-100"> {/* Added classes for sticky footer & bg */}
+      <body className="flex flex-col min-h-screen bg-white"> {/* Added classes for sticky footer & bg */}
         <Header />
         <main className="flex-grow container mx-auto px-4 py-8"> {/* flex-grow pushes footer down */}
           {children} {/* This is where your page content will go */}

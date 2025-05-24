@@ -1,60 +1,78 @@
 // src/app/page.tsx
-import Link from 'next/link'; // Import Link for navigation
+import Link from 'next/link';
 
 export default function HomePage() {
-  const myName = "Luke Edwards"; // Replace with your actual name
+  const myName = "Luke Edwards";
 
-  // Define the content for the boxes
   const featureBoxes = [
     {
       title: "Photography",
       description: "Capturing moments and perspectives.",
-      link: "/photography", // Target page for photography
-      bgColor: "bg-sky-500", // Tailwind background color
-      hoverBgColor: "hover:bg-sky-600",
+      link: "/photography",
+      bgColor: "bg-white",
     },
     {
       title: "Code Projects",
       description: "Exploring software development and creation.",
-      link: "/projects", // Target page for projects
-      bgColor: "bg-emerald-500",
-      hoverBgColor: "hover:bg-emerald-600",
+      link: "/projects",
+      bgColor: "bg-white",
     },
     {
       title: "Art / Music",
       description: "Creative expressions through various mediums.",
-      link: "/art-music", // Target page for art/music
-      bgColor: "bg-purple-500",
-      hoverBgColor: "hover:bg-purple-600",
+      link: "/art-music",
+      bgColor: "bg-white",
     },
   ];
 
   return (
-    <> {/* Using a Fragment because we'll have multiple top-level elements */}
-      <div className="text-center pt-0 pb-10">
-        <h1 className="text-6xl sm:text-7xl md:text-7xl lg:text-7xl font-bold text-gray-800 tracking-normal">
+    <>
+      {/* Hero Section */}
+      <div className="text-center pt-10 pb-10 sm:pt-12 sm:pb-12 md:pt-10 md:pb-16">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-black tracking-tight leading-tight">
           {myName}
         </h1>
-        <p className="mt-1 text-xl text-gray-600">
+        <p className="mt-2 text-md sm:text-lg text-gray-500">
           Portfolio Website
         </p>
       </div>
 
-      {/* Section for the three adjacent boxes */}
-      <section className="py-12">
+      {/* Card Section */}
+      <section className="pb-10 sm:pb-12 md:pb-12">
         <div className="container mx-auto px-4">
-          {/* Flex container for the boxes */}
-          {/* On small screens (default), stack them. On medium screens (md) and up, display them in a row. */}
-          <div className="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0">
+          <div className="
+            flex flex-col items-center gap-6 sm:gap-8 
+            md:grid md:grid-cols-3 md:gap-6 lg:gap-8 
+          ">
             {featureBoxes.map((box) => (
-              // Each box is a flex item. md:w-1/3 makes them take up 1/3 of the width on medium screens and up.
               <Link
                 href={box.link}
                 key={box.title}
-                className={`flex-1 p-8 rounded-lg shadow-lg text-white transition-all duration-300 ease-in-out transform hover:scale-105 ${box.bgColor} ${box.hoverBgColor}`}
+                className={`
+                  block                               
+                  w-full                           
+                  max-w-sm                            
+                  aspect-[16/10]                      
+                  p-5 sm:p-6                          
+                  rounded-xl shadow-xl  
+                  ${box.bgColor} text-black 
+                  transition-all duration-300 ease-in-out 
+                  transform hover:scale-105 hover:shadow-2xl
+                  border border-gray-300
+                  flex flex-col justify-center items-center 
+                  text-center         
+                  mx-auto             
+                `}
               >
-                <h2 className="text-3xl font-semibold mb-3">{box.title}</h2>
-                <p className="text-gray-100">{box.description}</p>
+                <div> 
+                  {/* THIS IS THE ONLY LINE CHANGED FOR FONT SIZE */}
+                  <h2 className="w-full text-xl sm:text-2xl md:text-2xl font-semibold mb-1 sm:mb-2 text-gray-800"> {/* Target size: e.g., text-2xl on md */}
+                    {box.title}
+                  </h2>
+                  <p className="w-full text-xs sm:text-sm text-gray-600">
+                    {box.description}
+                  </p>
+                </div>
               </Link>
             ))}
           </div>
