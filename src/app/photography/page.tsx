@@ -36,7 +36,7 @@ export default function PhotographyPage() {
       {/* Page Title Section - Styled like Hero on Homepage */}
       <div className="text-center pt-10 pb-10 sm:pt-12 sm:pb-12 md:pt-10 md:pb-16"> {/* Padding from 1st code block's title section */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-black tracking-tight leading-tight font-display"> {/* Text style from 1st code block's title */}
-          Photography Projects
+          Photography Portfolio
         </h1>
       </div>
 

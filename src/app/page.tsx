@@ -1,6 +1,7 @@
 // src/app/page.tsx
-import Link from 'next/link';
-import ScrollToSectionButton from '../components/ScrollToSectionButton'; // Ensure this path is correct
+import Link from 'next/link'; // Still useful for general links
+import ScrollToSectionButton from '../components/ScrollToSectionButton';
+import DraggableInteractiveLinkBox from '../components/DraggableInteractiveLinkBox'; // Ensure this component exists and is correct
 
 export default function HomePage() {
   const myName = "Luke Edwards";
@@ -14,9 +15,9 @@ export default function HomePage() {
       bgColor: "bg-white",
     },
     {
-      title: "Code Projects",
-      description: "Software development.",
-      link: "/projects",
+      title: "Technical Overview",
+      description: "Skills, experience, and selected projects.",
+      link: "/technical-overview",
       bgColor: "bg-white",
     },
     {
@@ -26,6 +27,16 @@ export default function HomePage() {
       bgColor: "bg-white",
     },
   ];
+
+  // Card base classes to be passed to DraggableInteractiveLinkBox
+  // Does NOT include transform/hover effects (like scaling on hover) handled by the DraggableInteractiveLinkBox component itself.
+  const cardBaseClasses = `
+    w-full max-w-sm aspect-[16/10] p-5 sm:p-6                          
+    rounded-xl shadow-xl text-black 
+    border border-gray-300 
+    flex flex-col justify-center items-center 
+    text-center mx-auto
+  `;
 
   return (
     <>
@@ -42,24 +53,22 @@ export default function HomePage() {
       </div>
 
       {/* Card Section */}
-      <section className="pb-10 sm:pb-12 md:pb-12">
+      <section className="pb-10 sm:pb-12 md:pb-24"> 
         <div className="container mx-auto px-4">
           <div className="
             flex flex-col items-center gap-6 sm:gap-8 
             md:grid md:grid-cols-3 md:gap-6 lg:gap-8 
           ">
             {featureBoxes.map((box) => (
-              <Link
-                href={box.link}
+              <DraggableInteractiveLinkBox 
                 key={box.title}
-                className={`
-                  block w-full max-w-sm aspect-[16/10] p-5 sm:p-6                          
-                  rounded-xl shadow-xl ${box.bgColor || 'bg-white'} text-black 
-                  transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl
-                  border border-gray-300 flex flex-col justify-center items-center 
-                  text-center mx-auto             
-                `}
+                href={box.link}
+                className={`${cardBaseClasses} ${box.bgColor || 'bg-white'}`}
+                // You can pass props to DraggableInteractiveLinkBox here if you defined them:
+                // e.g., stretchFactor={0.1} dragConstraint={60} maxRotate={5}
+                stretchFactor={0.1} // Making the "stretch" (squash) effect more noticeable
               >
+                {/* Content of the card */}
                 <div> 
                   <h2 className="w-full text-xl sm:text-2xl md:text-2xl font-semibold mb-1 sm:mb-2 text-gray-800"> 
                     {box.title}
@@ -68,7 +77,7 @@ export default function HomePage() {
                     {box.description}
                   </p>
                 </div>
-              </Link>
+              </DraggableInteractiveLinkBox>
             ))}
           </div>
         </div>
@@ -76,8 +85,8 @@ export default function HomePage() {
 
       {/* Scroll Down Indicator Section (and Spacer) */}
       <div className="relative text-center 
-                      pt-4 sm:pt-6 md:pt-8              {/* Modest top padding for space above arrow */}
-                      pb-20 sm:pb-28 md:pb-36">         {/* Increased bottom padding to push "About Me" down */}
+                      pt-6 sm:pt-8 md:pt-2              
+                      pb-20 sm:pb-24 md:pb-10">         
         <ScrollToSectionButton 
           targetId="about-me-section" 
           ariaLabel="Scroll to about me section" 
@@ -85,13 +94,13 @@ export default function HomePage() {
       </div>
 
       {/* About Me Section Placeholder */}
-      <section id="about-me-section" className="py-16 sm:py-20 md:py-24 bg-gray-50">
+      <section id="about-me-section" className="py-16 sm:py-20 md:py-4 bg-gray-50 rounded-xl">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-8 font-display text-gray-800">About Me</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-10 font-display text-gray-800">Hello!</h2>
           <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-8 items-center">
             <div className="w-48 h-48 sm:w-60 sm:h-60 md:w-72 md:h-72 rounded-full overflow-hidden mx-auto shadow-lg">
               <img 
-                src="https://via.placeholder.com/300" // Replace with your actual image path
+                src="https://via.placeholder.com/300" 
                 alt="A picture of Luke Edwards" 
                 className="w-full h-full object-cover"
               />
@@ -102,7 +111,7 @@ export default function HomePage() {
                 software development, and various artistic expressions. This website is a canvas
                 for my journey and creations.
               </p>
-              <p className="mt-4 text-lg text-gray-700 leading-relaxed">
+              <p className="mt-6 text-lg text-gray-700 leading-relaxed">
                 Feel free to explore my projects and get in touch!
               </p>
             </div>

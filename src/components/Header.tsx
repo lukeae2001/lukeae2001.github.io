@@ -2,12 +2,24 @@
 import Link from 'next/link';
 
 const Header = () => {
-  return ( // Parentheses start on the same line as return
-    <header className="bg-white text-gray-800 shadow-md border-b border-gray-300">
+  return (
+    <header 
+      className="
+        bg-white text-gray-800 
+        shadow-md 
+        border-b border-gray-300
+        rounded-bl-xl rounded-br-xl
+      "
+    >
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link 
           href="/" 
-          className="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors font-display"
+          className="
+            text-2xl font-bold text-gray-800 
+            transition-colors font-display 
+            flex items-center {/* Optional: For precise vertical centering of the text itself if needed */}
+          " 
+          // REMOVED hover:text-blue-600
         >
           LE
         </Link>
@@ -32,8 +44,7 @@ const Header = () => {
         </nav>
       </div>
     </header>
-  ); // Parentheses and semicolon for the return statement
+  );
 };
 
 export default Header;
-  
