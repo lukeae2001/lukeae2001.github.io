@@ -1,5 +1,4 @@
 // src/app/page.tsx
-import Link from 'next/link';
 import ScrollToSectionButton from '../components/ScrollToSectionButton';
 import DraggableInteractiveLinkBox from '../components/DraggableInteractiveLinkBox';
 
@@ -108,7 +107,7 @@ export default function HomePage() {
             </div>
             <div className="text-center md:max-w-xl lg:max-w-2xl">
               <p className="text-lg text-gray-700 leading-relaxed">
-                I'm Luke,
+                I&apos;m Luke,
               </p>
               <p className="mt-6 text-lg text-gray-700 leading-relaxed">
                 a passionate individual exploring the worlds of photography,

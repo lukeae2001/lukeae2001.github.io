@@ -1,18 +1,19 @@
-// src/components/DraggableInteractiveLinkBox.tsx
 "use client";
 
-import React, { useRef, useState, useEffect, ReactNode, MouseEvent } from 'react';
+import React, { useRef, useState, useEffect, ReactNode, MouseEvent, useCallback } from 'react'; // Added useCallback
 import Link from 'next/link';
 
+// ... (interface remains the same)
 interface DraggableInteractiveLinkBoxProps {
   href: string;
   className?: string;
   children: ReactNode;
   maxRotate?: number;
   perspective?: number;
-  dragConstraint?: number; // Max pixels the card can be dragged from origin
-  stretchFactor?: number; // How much to visually indicate "stretch" (e.g., scale down)
+  dragConstraint?: number;
+  stretchFactor?: number;
 }
+
 
 const DraggableInteractiveLinkBox: React.FC<DraggableInteractiveLinkBoxProps> = ({
   href,
@@ -20,21 +21,20 @@ const DraggableInteractiveLinkBox: React.FC<DraggableInteractiveLinkBoxProps> = 
   children,
   maxRotate = 6,
   perspective = 1000,
-  dragConstraint = 50, // Card can be dragged 50px in any direction from center
-  stretchFactor = 0.05, // Card will scale down by up to 5% at max drag
+  dragConstraint = 50,
+  stretchFactor = 0.05,
 }) => {
   const cardRef = useRef<HTMLAnchorElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 }); // Current offset from original
-  const [startDragMouse, setStartDragMouse] = useState({ x: 0, y: 0 }); // Mouse position at drag start
-  const [startDragCard, setStartDragCard] = useState({ x: 0, y: 0 }); // Card position at drag start
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [startDragMouse, setStartDragMouse] = useState({ x: 0, y: 0 });
+  const [startDragCard, setStartDragCard] = useState({ x: 0, y: 0 });
 
-  // For 3D tilt effect
+  // ... (handleMouseMoveTilt and handleMouseLeaveTilt are fine)
   const handleMouseMoveTilt = (e: MouseEvent<HTMLAnchorElement>) => {
     if (!cardRef.current || isDragging) return;
     setIsHovering(true);
-    // ... (tilt logic from previous version - keeping it concise here)
     const card = cardRef.current;
     const rect = card.getBoundingClientRect();
     const mouseX = e.clientX - rect.left - rect.width / 2;
@@ -52,8 +52,7 @@ const DraggableInteractiveLinkBox: React.FC<DraggableInteractiveLinkBoxProps> = 
     card.style.setProperty('--rotateX', '0deg');
     card.style.setProperty('--rotateY', '0deg');
   };
-  
-  // Drag handlers
+
   const handleMouseDown = (e: MouseEvent<HTMLAnchorElement>) => {
     if (e.button !== 0) return; 
     e.preventDefault();
@@ -64,32 +63,31 @@ const DraggableInteractiveLinkBox: React.FC<DraggableInteractiveLinkBoxProps> = 
         cardRef.current.style.setProperty('--rotateY', '0deg');
     }
     setStartDragMouse({ x: e.clientX, y: e.clientY });
-    setStartDragCard({ x: position.x, y: position.y }); // Start from current position
+    setStartDragCard({ x: position.x, y: position.y });
   };
 
-  const handleMouseMoveDrag = (e: MouseEvent<HTMLElement>) => {
+  // WRAP these two functions in useCallback
+  const handleMouseMoveDrag = useCallback((e: MouseEvent<HTMLElement>) => {
     if (!isDragging || !cardRef.current) return;
 
     let newX = startDragCard.x + (e.clientX - startDragMouse.x);
     let newY = startDragCard.y + (e.clientY - startDragMouse.y);
 
-    // Apply constraints
     newX = Math.max(-dragConstraint, Math.min(dragConstraint, newX));
     newY = Math.max(-dragConstraint, Math.min(dragConstraint, newY));
     
     setPosition({ x: newX, y: newY });
-  };
+  }, [isDragging, startDragCard, startDragMouse, dragConstraint]); // Add dependencies for this function
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     if (!isDragging) return;
     setIsDragging(false);
-    // Position will animate back to 0,0 due to CSS transition when style is reset
-    // For a more "springy" return, a library is needed. Here we just reset.
-    // The transition will occur when the transform style is updated in the main return
-  };
+  }, [isDragging]); // Add dependencies for this function
 
+  // ADD the useCallback-wrapped functions to the dependency array of useEffect
   useEffect(() => {
     if (isDragging) {
+      // Create local handlers that call the memoized functions
       const handleGlobalMouseMove = (e: globalThis.MouseEvent) => 
         handleMouseMoveDrag(e as unknown as MouseEvent<HTMLElement>);
       const handleGlobalMouseUp = () => handleMouseUp();
@@ -101,13 +99,12 @@ const DraggableInteractiveLinkBox: React.FC<DraggableInteractiveLinkBoxProps> = 
         window.removeEventListener('mouseup', handleGlobalMouseUp);
       };
     } else {
-      // When not dragging, animate position back to 0,0
-      // This will trigger the CSS transition on the transform property
       setPosition({ x: 0, y: 0 });
     }
-  }, [isDragging, startDragMouse, startDragCard]);
+  }, [isDragging, handleMouseMoveDrag, handleMouseUp]); // CORRECTED dependency array
 
 
+  // ... (rest of the component logic for transforms and the return statement remains the same)
   // Calculate stretch effect (inverse scale)
   const dragDistance = Math.sqrt(position.x ** 2 + position.y ** 2);
   const normalizedDistance = Math.min(1, dragDistance / dragConstraint); // 0 to 1
@@ -118,8 +115,6 @@ const DraggableInteractiveLinkBox: React.FC<DraggableInteractiveLinkBoxProps> = 
   if (isDragging) {
     transformValue = `perspective(${perspective}px) translate(${position.x}px, ${position.y}px) scale(${currentStretchScale})`;
   } else {
-    // When not dragging, apply tilt or reset to base scale
-    // The position x,y will be transitioning back to 0,0 because of setPosition in useEffect
     transformValue = `perspective(${perspective}px) translate(${position.x}px, ${position.y}px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) scale(${isHovering ? 1.03 : 1})`;
   }
 
@@ -132,20 +127,18 @@ const DraggableInteractiveLinkBox: React.FC<DraggableInteractiveLinkBoxProps> = 
       onMouseMove={handleMouseMoveTilt}
       onMouseLeave={handleMouseLeaveTilt}
       onClick={(e) => {
-        // Prevent navigation only if a significant drag occurred AND released on the card
-        const dragThreshold = 5; // pixels
+        const dragThreshold = 5;
         if (Math.abs(startDragCard.x - position.x) > dragThreshold || Math.abs(startDragCard.y - position.y) > dragThreshold ) {
-            if (isDragging){ // if mouseup happened outside, isDragging would be false here
+            if (isDragging){
                 e.preventDefault();
             }
         }
-        // Resetting position is handled by the useEffect when isDragging becomes false
       }}
       className={`
         draggable-card relative block transform-style-preserve-3d 
         cursor-grab 
         ${isDragging ? 'cursor-grabbing shadow-2xl z-20' : 'hover:shadow-2xl z-10'}
-        transition-transform duration-300 ease-[cubic-bezier(0.2,1,0.3,1)] {/* Spring-like easing */}
+        transition-transform duration-300 ease-[cubic-bezier(0.2,1,0.3,1)]
         ${className || ''} 
       `}
       style={
