@@ -1,6 +1,8 @@
 // src/app/technical-overview/page.tsx
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+
 
 // Example icons from react-icons - YOU MUST CHOOSE AND IMPORT YOUR OWN
 import { FaReact, FaNodeJs, FaPython, FaGitAlt, FaDocker, FaAws } from 'react-icons/fa';
@@ -107,7 +109,7 @@ export default function TechnicalOverviewPage() {
               Technical Proficiency
             </h1>
             <p className={`mt-4 ${descriptionFontSize} text-gray-600 max-w-3xl mx-auto`}>
-              An overview of the technologies I leverage, my core skills, and a selection of projects I've brought to life.
+              An overview of the technologies I leverage, my core skills, and a selection of projects I&apos;ve brought to life.
             </p>
           </div>
 
@@ -154,9 +156,11 @@ export default function TechnicalOverviewPage() {
                 >
                   {project.imageUrl && (
                     <div className="aspect-[16/10] overflow-hidden">
-                      <img 
+                      <Image
                         src={project.imageUrl} 
-                        alt={`${project.title} screenshot`} 
+                        alt={`${project.title} screenshot`}
+                        width={800}
+                        height={600}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" 
                       />
                     </div>
