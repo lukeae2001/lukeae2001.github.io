@@ -1,6 +1,7 @@
 // src/app/page.tsx
 import ScrollToSectionButton from '../components/ScrollToSectionButton';
 import DraggableInteractiveLinkBox from '../components/DraggableInteractiveLinkBox';
+import Image from 'next/image';
 
 export default function HomePage() {
   const myName = "Luke Edwards";
@@ -99,7 +100,7 @@ export default function HomePage() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-6 font-display text-black">Hello!</h2>
           <div className="max-w-3xl mx-auto flex flex-col items-center gap-8">
             <div className="w-48 h-48 sm:w-60 sm:h-60 md:w-72 md:h-72 rounded-xl overflow-hidden shadow-lg">
-              <image
+              <Image
                 src="/images/profile/Profile-Picture-3.jpg"
                 alt="A picture of Luke Edwards"
                 width = {2048}
