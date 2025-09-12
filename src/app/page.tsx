@@ -99,9 +99,11 @@ export default function HomePage() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-6 font-display text-black">Hello!</h2>
           <div className="max-w-3xl mx-auto flex flex-col items-center gap-8">
             <div className="w-48 h-48 sm:w-60 sm:h-60 md:w-72 md:h-72 rounded-xl overflow-hidden shadow-lg">
-              <img
+              <image
                 src="/images/profile/Profile-Picture-3.jpg"
                 alt="A picture of Luke Edwards"
+                width = {2048}
+                height = {2048}
                 className="w-full h-full object-cover"
               />
             </div>
