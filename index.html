@@ -3,76 +3,84 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Luke Edwards · Cyber security and cloud</title>
-<meta name="description" content="Luke Edwards, Computer Science student at Griffith University working toward cloud security. Certifications, skills, CV and contact.">
+<title>Luke Edwards</title>
+<meta name="description" content="Luke Edwards, Computer Science student at Griffith University working toward cloud security.">
 <style>
-:root {
-  --bg: #f7f6f2; --fg: #1d1d1b; --muted: #5d5d58; --line: #dedcd3; --card: #ffffff; --accent: #0f6b5c; --accent-soft: #e2f0ec;
-  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-}
+:root { --bg: #fbfaf7; --fg: #1a1a1a; --muted: #6b6b66; --line: #e4e2dc; --link: #1a1a1a; }
 @media (prefers-color-scheme: dark) {
-  :root { --bg: #121412; --fg: #ecebe6; --muted: #a3a29b; --line: #2b2e2b; --card: #1a1d1a; --accent: #5fc7b0; --accent-soft: #1c2d29; }
+  :root { --bg: #141414; --fg: #e8e6e1; --muted: #9a9892; --line: #2c2c2a; --link: #e8e6e1; }
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 var(--sans); }
-main { max-width: 760px; margin: 0 auto; padding: 56px 20px 72px; }
-.kicker { font: 13px var(--mono); color: var(--accent); letter-spacing: .04em; text-transform: uppercase; margin: 0 0 10px; }
-h1 { font-size: clamp(32px, 6vw, 46px); line-height: 1.1; margin: 0 0 14px; letter-spacing: -.02em; }
-.lede { color: var(--muted); font-size: 19px; margin: 0 0 22px; max-width: 60ch; }
-.links { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px; }
-.links a { color: var(--fg); text-decoration: none; border: 1px solid var(--line); background: var(--card); padding: 8px 14px; border-radius: 999px; font-size: 15px; }
-.links a.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
-.links a:hover { border-color: var(--accent); }
-h2 { font: 600 13px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 40px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
-.project { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 12px; }
-.project h3 { margin: 0 0 6px; font-size: 18px; }
-.project h3 a { color: var(--fg); text-decoration-color: var(--accent); text-underline-offset: 3px; }
-.project p { margin: 0 0 10px; color: var(--muted); }
-.tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.tags span { font: 12px var(--mono); background: var(--accent-soft); color: var(--accent); padding: 3px 8px; border-radius: 6px; }
-.row { display: grid; grid-template-columns: 9.5em 1fr; gap: 4px 16px; padding: 10px 0; border-bottom: 1px dashed var(--line); }
-.row:last-child { border-bottom: 0; }
-.row .when { font: 14px var(--mono); color: var(--muted); padding-top: 2px; }
-.row b { font-weight: 600; }
-.status { font: 12px var(--mono); padding: 2px 7px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted); margin-left: 6px; white-space: nowrap; }
-.status.done { border-color: var(--accent); color: var(--accent); }
-.me { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; display: block; margin: 0 0 18px; border: 1px solid var(--line); }
-footer { margin-top: 48px; color: var(--muted); font-size: 14px; }
-@media (max-width: 520px) { .row { grid-template-columns: 1fr; } main { padding-top: 36px; } }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 18px/1.65 "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; }
+main { max-width: 640px; margin: 0 auto; padding: 72px 22px 80px; }
+header { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
+header img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; flex: none; }
+h1 { font-size: 34px; font-weight: 600; line-height: 1.15; margin: 0; letter-spacing: -.01em; }
+header p { margin: 2px 0 0; color: var(--muted); }
+a { color: var(--link); text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-color: var(--fg); }
+.intro p { margin: 0 0 14px; }
+.contact { margin: 22px 0 0; }
+.contact a + a::before { content: "·"; color: var(--muted); display: inline-block; margin: 0 10px; text-decoration: none; }
+h2 { font-size: 15px; font-weight: 600; margin: 52px 0 6px; padding-bottom: 6px; border-bottom: 1px solid var(--line); letter-spacing: .02em; }
+dl { margin: 0; display: grid; grid-template-columns: 8.5em 1fr; }
+dt, dd { padding: 10px 0; margin: 0; }
+dt { color: var(--muted); }
+dd span { display: block; color: var(--muted); }
+footer { margin-top: 60px; color: var(--muted); font-size: 15px; }
+@media (max-width: 540px) {
+  main { padding-top: 44px; }
+  dl { grid-template-columns: 1fr; }
+  dt { padding-bottom: 0; }
+  dd { padding-top: 2px; }
+}
 </style>
 </head>
 <body>
 <main>
-  <img class="me" src="images/luke.jpg" alt="Luke Edwards" width="96" height="96">
-  <p class="kicker">Gold Coast, Australia</p>
-  <h1>Luke Edwards</h1>
-  <p class="lede">Computer Science student at Griffith University, majoring in Data Science and AI, working toward cloud security. Looking for IT, cyber or cloud work from early 2027 on the Gold Coast, in Brisbane or remote.</p>
-  <nav class="links">
-    <a class="primary" href="Luke-Edwards-CV.pdf">CV (PDF)</a>
-    <a href="https://github.com/lukeae2001">GitHub</a>
-    <a href="https://www.linkedin.com/in/luke-e-0b370a140/">LinkedIn</a>
-    <a href="mailto:lukeae2001@gmail.com">lukeae2001@gmail.com</a>
-  </nav>
+  <header>
+    <img src="images/luke.jpg" alt="Luke Edwards" width="84" height="84">
+    <div>
+      <h1>Luke Edwards</h1>
+      <p>Gold Coast, Australia</p>
+    </div>
+  </header>
 
-  <h2>Skills</h2>
-  <div class="row"><span class="when">Code</span><span>Python, PyTorch (RNNs, sequence-to-sequence models), TypeScript, Git</span></div>
-  <div class="row"><span class="when">Systems</span><span>Linux command line, Windows</span></div>
-  <div class="row"><span class="when">Studying</span><span>Security operations, threats and incident response (Security+); AWS core services, IAM and the shared responsibility model (Cloud Practitioner); TryHackMe SOC Level 1</span></div>
-
-  <!-- Add a "Projects" section here once you've built your own. The .project card styles are already in the CSS above. -->
+  <section class="intro">
+    <p>I study Computer Science at Griffith University, majoring in Data Science and AI, and I'm working toward a career in cloud security.</p>
+    <p>I'm sitting CompTIA Security+ in November and AWS Cloud Practitioner in December. I'm looking for IT, cyber security or cloud work from early 2027, on the Gold Coast, in Brisbane or remote.</p>
+    <p class="contact">
+      <a href="Luke-Edwards-CV.pdf">CV</a><a href="mailto:lukeae2001@gmail.com">Email</a><a href="https://www.linkedin.com/in/luke-e-0b370a140/">LinkedIn</a><a href="https://github.com/lukeae2001">GitHub</a>
+    </p>
+  </section>
 
   <h2>Certifications</h2>
-  <div class="row"><span class="when">Nov 2026</span><span><b>CompTIA Security+ (SY0-801)</b><span class="status">in progress</span></span></div>
-  <div class="row"><span class="when">Dec 2026</span><span><b>AWS Certified Cloud Practitioner</b><span class="status">in progress</span></span></div>
+  <dl>
+    <dt>Nov 2026</dt><dd>CompTIA Security+ (SY0-801)<span>Studying now, exam in November</span></dd>
+    <dt>Dec 2026</dt><dd>AWS Certified Cloud Practitioner<span>Studying now, exam in December</span></dd>
+  </dl>
 
   <h2>Education</h2>
-  <div class="row"><span class="when">to 2028</span><span><b>Bachelor of Computer Science</b>, Data Science and AI major, Griffith University. Part-time. GPA 6.25/7, Griffith Award for Academic Excellence 2025. Study includes concurrent and distributed programming, computer vision, and machine learning and NLP with PyTorch.</span></div>
+  <dl>
+    <dt>Until 2028</dt><dd>Bachelor of Computer Science, Griffith University<span>Data Science and AI major, part-time. GPA 6.25 out of 7. Griffith Award for Academic Excellence, 2025.</span></dd>
+  </dl>
+
+  <h2>Skills</h2>
+  <dl>
+    <dt>Code</dt><dd>Python, PyTorch, TypeScript, Git</dd>
+    <dt>Systems</dt><dd>Linux, Windows</dd>
+    <dt>Studying</dt><dd>Security operations and incident response, AWS and IAM, TryHackMe SOC Level 1</dd>
+  </dl>
+
+  <!-- Add a "Projects" section here once you've built your own. -->
 
   <h2>Work</h2>
-  <div class="row"><span class="when">2024 to now</span><span><b>Gardener</b>, Dreamworld, Gold Coast. 5am starts in a busy public venue, working safely around guests, rides and machinery, while studying part-time.</span></div>
+  <dl>
+    <dt>2024 to now</dt><dd>Gardener, Dreamworld<span>Early starts in a busy theme park, working safely around guests and rides while I study.</span></dd>
+  </dl>
 
-  <footer>© 2026 Luke Edwards</footer>
+  <footer>Luke Edwards, 2026</footer>
 </main>
 </body>
 </html>
